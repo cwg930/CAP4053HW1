@@ -1,0 +1,14 @@
+/home/chris/CAP4053/Homework1/Homework1/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/OpenTK.dll.config
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/Tao.Sdl.dll.config
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/Homework1.exe.mdb
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/Homework1.exe
+/home/chris/CAP4053/Homework1/Homework1/obj/x86/Debug/Homework1.exe
+/home/chris/CAP4053/Homework1/Homework1/obj/x86/Debug/Homework1.exe.mdb
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/MonoGame.Framework.dll
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/OpenTK.dll
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/Tao.Sdl.dll
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/Content/Graphics/HW1Player.xnb
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/Content/Fonts/DebugText.xnb
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/Content/Graphics/HW1WallHorizontal.xnb
+/home/chris/CAP4053/Homework1/Homework1/bin/Debug/Content/Graphics/HW1WallVertical.xnb
