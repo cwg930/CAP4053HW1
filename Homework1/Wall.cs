@@ -4,20 +4,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Homework1
 {
-	public class Wall
+	public class Wall : Agent
 	{
-		public Texture2D WallTexture;
-		public Vector2 Position;
 
 		public void Initialize(Texture2D texture, Vector2 position)
 		{
-			WallTexture = texture;
+			AgentTexture = texture;
 			Position = position;
+			Bounds = new Rectangle (Position.X, Position.Y, Width, Height);
 		}
 
 		public void Draw(SpriteBatch sb)
 		{
-			sb.Draw (WallTexture, Position, Color.White);
+			sb.Draw (AgentTexture, Position, Color.White);
 		}
 
 	}

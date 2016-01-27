@@ -5,30 +5,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Homework1
 {
-	public class Player
+	public class Player : Agent
 	{
-		public Texture2D PlayerTexture;
-		public Vector2 Position;
 		public float Heading;
-		public int Width 
-		{
-			get { return PlayerTexture.Width; }
-		}
-
-		public int Height
-		{
-			get { return PlayerTexture.Height; }
-		}
 
 		private Vector2 Center;
 
 		public void Initialize(Texture2D texture, Vector2 position, float heading)
 		{
-			PlayerTexture = texture;
+			AgentTexture = texture;
 			Position = position;
 			Heading = heading;
-			Center.X = PlayerTexture.Width / 2;
-			Center.Y = PlayerTexture.Height / 2;
+			Center.X = AgentTexture.Width / 2;
+			Center.Y = AgentTexture.Height / 2;
+			Bounds = new Rectangle (Position.X, Position.Y, Width, Height);
 		}
 
 		public void Update()
@@ -37,8 +27,9 @@ namespace Homework1
 
 		public void Draw(SpriteBatch spriteBatch)
 		{
-			spriteBatch.Draw (PlayerTexture, Position, null, Color.White, Heading, Center, 1.0f, SpriteEffects.None, 0f);
+			spriteBatch.Draw (AgentTexture, Position, null, Color.White, Heading, Center, 1.0f, SpriteEffects.None, 0f);
 		}
+			
 	}
 }
 

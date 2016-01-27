@@ -106,18 +106,6 @@ namespace Homework1
 
 		private void UpdatePlayer(GameTime gameTime)
 		{
-			if (currentKeyboardState.IsKeyDown (Keys.Left)) {
-				player.Position.X -= playerMoveSpeed;
-			}
-			if (currentKeyboardState.IsKeyDown (Keys.Right)) {
-				player.Position.X += playerMoveSpeed;
-			}
-			if (currentKeyboardState.IsKeyDown (Keys.Up)) {
-				player.Position.Y -= playerMoveSpeed;
-			}
-			if (currentKeyboardState.IsKeyDown (Keys.Down)) {
-				player.Position.Y += playerMoveSpeed;
-			}
 			if (currentKeyboardState.IsKeyDown (Keys.W)) {
 				player.Position.X += (float)(Math.Cos (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
 				player.Position.Y += (float)(Math.Sin (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
@@ -132,8 +120,7 @@ namespace Homework1
 			if (currentKeyboardState.IsKeyDown (Keys.D)) {
 				player.Heading += playerTurnSpeed;
 			}
-
-
+				
 			player.Position.X = MathHelper.Clamp (player.Position.X, player.Width / 2, GraphicsDevice.Viewport.Width - player.Width / 2);
 			player.Position.Y = MathHelper.Clamp (player.Position.Y, player.Height / 2, GraphicsDevice.Viewport.Height - player.Height / 2);
 
@@ -157,6 +144,7 @@ namespace Homework1
 
 			base.Draw (gameTime);
 		}
+			
 	}
 }
 
