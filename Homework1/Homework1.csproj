@@ -49,12 +49,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Wall.cs" />
-    <Compile Include="AgentInterface.cs" />
+    <Compile Include="Agent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
     <None Include="Content\Content.mgcb" />
     <None Include="packages.config" />
+    <None Include="options.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OpenTK.dll.config">

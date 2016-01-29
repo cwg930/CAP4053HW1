@@ -9,7 +9,12 @@ namespace Homework1
 	{
 		public float Heading;
 
+		public override Rectangle BoundingBox{
+			get { return new Rectangle ((int)Position.X - AgentTexture.Width/2, (int)Position.Y - AgentTexture.Height/2, Width, Height); }
+		}
+
 		private Vector2 Center;
+
 
 		public void Initialize(Texture2D texture, Vector2 position, float heading)
 		{
@@ -18,7 +23,6 @@ namespace Homework1
 			Heading = heading;
 			Center.X = AgentTexture.Width / 2;
 			Center.Y = AgentTexture.Height / 2;
-			Bounds = new Rectangle (Position.X, Position.Y, Width, Height);
 		}
 
 		public void Update()

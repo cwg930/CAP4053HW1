@@ -1,6 +1,6 @@
 ﻿#region Using Statements
 using System;
-
+using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
@@ -20,19 +20,22 @@ namespace Homework1
 		SpriteFont font;
 
 		Player player;
-		Wall wall1;
-		Wall wall2;
+		Wall[] walls;
+		int numWalls = 2;
 		KeyboardState currentKeyboardState;
 		KeyboardState previousKeyboardState;
 
 		float playerMoveSpeed;
 		float playerTurnSpeed;
 
+		//Debug stuff
+		Texture2D debugTex;
+
 		public Game1 ()
 		{
 			graphics = new GraphicsDeviceManager (this);
-			Content.RootDirectory = "Content";	            
-			graphics.IsFullScreen = true;		
+			Content.RootDirectory = "Content";
+			graphics.IsFullScreen = true;
 		}
 
 		/// <summary>
@@ -47,8 +50,9 @@ namespace Homework1
 			player = new Player();
 			playerMoveSpeed = 8.0f;
 			playerTurnSpeed = MathHelper.ToRadians (5.0f); 
-			wall1 = new Wall ();
-			wall2 = new Wall ();
+			walls = new Wall[numWalls];
+			for(int i = 0; i < numWalls; i++)
+				walls[i] = new Wall();
 			base.Initialize ();
 				
 		}
@@ -67,18 +71,19 @@ namespace Homework1
 	
 			player.Initialize (Content.Load<Texture2D> ("Graphics/HW1Player"), playerPosition, 0.0f);
 			Random r = new Random ();
-			Vector2 wallPosition = new Vector2 (r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Width), 
-				                       r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Height)); 
-
-			wall1.Initialize (Content.Load<Texture2D> ("Graphics/HW1WallHorizontal"), wallPosition);
-
-			wallPosition = new Vector2 (r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Width), 
-				r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Height)); 
-
-			wall2.Initialize (Content.Load<Texture2D> ("Graphics/HW1WallVertical"), wallPosition);
-
+			for (int i = 0; i < numWalls; i++) {				
+				Vector2 wallPosition = new Vector2 (r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Width), 
+					                      r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Height));
+				if (r.Next (1, 10) <= 5)
+					walls [i].Initialize (Content.Load<Texture2D>("Graphics/HW1WallHorizontal"), wallPosition);
+				else
+					walls [i].Initialize (Content.Load<Texture2D>("Graphics/HW1WallVertical"), wallPosition);
+			}
 			font = Content.Load<SpriteFont> ("Fonts/DebugText");
 
+			//debug texture for drawing collison rectangles
+			debugTex = new Texture2D(GraphicsDevice, 1, 1);
+			debugTex.SetData (new Color[] { Color.White });
 		}
 
 		/// <summary>
@@ -106,13 +111,15 @@ namespace Homework1
 
 		private void UpdatePlayer(GameTime gameTime)
 		{
+			float velX = (float)(Math.Cos (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
+			float velY = (float)(Math.Sin (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
 			if (currentKeyboardState.IsKeyDown (Keys.W)) {
-				player.Position.X += (float)(Math.Cos (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
-				player.Position.Y += (float)(Math.Sin (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
+				player.Position.X += velX;
+				player.Position.Y += velY;
 			}
 			if (currentKeyboardState.IsKeyDown (Keys.S)) {
-				player.Position.X -= (float)(Math.Cos (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
-				player.Position.Y -= (float)(Math.Sin (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
+				player.Position.X -= velX;
+				player.Position.Y -= velY;
 			}
 			if (currentKeyboardState.IsKeyDown (Keys.A)) {
 				player.Heading -= playerTurnSpeed;
@@ -120,7 +127,18 @@ namespace Homework1
 			if (currentKeyboardState.IsKeyDown (Keys.D)) {
 				player.Heading += playerTurnSpeed;
 			}
-				
+
+			foreach (Wall w in walls) {
+				if (player.DetectCollision (w)) {
+					if (currentKeyboardState.IsKeyDown(Keys.W)) {
+						player.Position.X -= velX;
+						player.Position.Y -= velY;
+					} else {
+						player.Position.X += velX;
+						player.Position.Y += velY;
+					}
+				}
+			}
 			player.Position.X = MathHelper.Clamp (player.Position.X, player.Width / 2, GraphicsDevice.Viewport.Width - player.Width / 2);
 			player.Position.Y = MathHelper.Clamp (player.Position.Y, player.Height / 2, GraphicsDevice.Viewport.Height - player.Height / 2);
 
@@ -129,7 +147,7 @@ namespace Homework1
 		/// <summary>
 		/// This is called when the game should draw itself.
 		/// </summary>
-		/// <param name="gameTime">Provides a snapshot of timing values.</param>
+		/// <param name="gameTime">Prsovides a snapshot of timing values.</param>
 		protected override void Draw (GameTime gameTime)
 		{
 			graphics.GraphicsDevice.Clear (Color.CornflowerBlue);
@@ -137,9 +155,18 @@ namespace Homework1
 			//TODO: Add your drawing code here
 			spriteBatch.Begin();
 			player.Draw (spriteBatch);
-			wall1.Draw (spriteBatch);
-			wall2.Draw (spriteBatch);
-			spriteBatch.DrawString (font, "Heading (deg): " + (MathHelper.ToDegrees (player.Heading) % 360), new Vector2 (0, 0), Color.Black);
+			for (int i = 0; i < numWalls; i++) {
+				walls [i].Draw (spriteBatch);
+				//debug stuff
+				spriteBatch.DrawString (font, "Wall " + i + " loc (X,Y): " + walls [i].Position.ToString ()
+					+ "Bounding box: " + walls[i].BoundingBox.ToString(), 
+					new Vector2 (0, GraphicsDevice.Viewport.Height - (font.LineSpacing*(walls.Length-i))), Color.Black);
+				//spriteBatch.Draw (debugTex, walls [i].BoundingBox, Color.White);
+			}
+			spriteBatch.DrawString (font, "Heading (deg): " + (MathHelper.ToDegrees (player.Heading) % 360) 
+				+ "\nPosition (x,y): "+ player.Position.ToString(), new Vector2 (0, 0), Color.Black);
+			//more debug
+			//spriteBatch.Draw(debugTex, player.BoundingBox, Color.White);
 			spriteBatch.End ();
 
 			base.Draw (gameTime);

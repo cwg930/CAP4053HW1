@@ -6,12 +6,14 @@ namespace Homework1
 {
 	public class Wall : Agent
 	{
+		public override Rectangle BoundingBox {
+			get { return new Rectangle ((int)Position.X, (int)Position.Y, Width, Height); }
+		}
 
 		public void Initialize(Texture2D texture, Vector2 position)
 		{
 			AgentTexture = texture;
 			Position = position;
-			Bounds = new Rectangle (Position.X, Position.Y, Width, Height);
 		}
 
 		public void Draw(SpriteBatch sb)
