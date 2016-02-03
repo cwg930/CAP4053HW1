@@ -37,7 +37,7 @@ namespace Homework1
 			Content.RootDirectory = "Content";
 			graphics.IsFullScreen = true;
 		}
-
+	
 		/// <summary>
 		/// Allows the game to perform any initialization it needs to before starting to run.
 		/// This is where it can query for any required services and load any non-graphic
@@ -114,12 +114,10 @@ namespace Homework1
 			float velX = (float)(Math.Cos (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
 			float velY = (float)(Math.Sin (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
 			if (currentKeyboardState.IsKeyDown (Keys.W)) {
-				player.Position.X += velX;
-				player.Position.Y += velY;
+				player.Position += new Vector2 (velX, velY);
 			}
 			if (currentKeyboardState.IsKeyDown (Keys.S)) {
-				player.Position.X -= velX;
-				player.Position.Y -= velY;
+				player.Position -= new Vector2 (velX, velY);
 			}
 			if (currentKeyboardState.IsKeyDown (Keys.A)) {
 				player.Heading -= playerTurnSpeed;
@@ -128,20 +126,30 @@ namespace Homework1
 				player.Heading += playerTurnSpeed;
 			}
 
+			// Force headnig to wrap around to prevent ambiguous orientation values.
+			// For example if we don't wrap heading, if we rotate from 30 degrees one direction
+			//   60 degrees and through the 0 angle, we would consider our heading (incorrectly)
+			//   to be 30 degrees again.
+			if (player.Heading < 0)
+			{
+				player.Heading += MathHelper.ToRadians (360);
+			}
+			// Clamp player heading between 0 and 360 degrees.
+			player.Heading = (player.Heading % MathHelper.ToRadians(360));
+
 			foreach (Wall w in walls) {
 				if (player.DetectCollision (w)) {
 					if (currentKeyboardState.IsKeyDown(Keys.W)) {
-						player.Position.X -= velX;
-						player.Position.Y -= velY;
+						player.Position -= new Vector2 (velX, velY);
 					} else {
-						player.Position.X += velX;
-						player.Position.Y += velY;
+						player.Position += new Vector2 (velX, velY);
 					}
 				}
 			}
-			player.Position.X = MathHelper.Clamp (player.Position.X, player.Width / 2, GraphicsDevice.Viewport.Width - player.Width / 2);
-			player.Position.Y = MathHelper.Clamp (player.Position.Y, player.Height / 2, GraphicsDevice.Viewport.Height - player.Height / 2);
 
+			float clampedX = MathHelper.Clamp (player.Position.X, player.Width / 2, GraphicsDevice.Viewport.Width - player.Width / 2);
+			float clampedY = MathHelper.Clamp (player.Position.Y, player.Height / 2, GraphicsDevice.Viewport.Height - player.Height / 2);
+			player.Position = new Vector2 (clampedX, clampedY);
 		}
 
 		/// <summary>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -7,22 +8,24 @@ namespace Homework1
 {
 	public class Player : Agent
 	{
-		public float Heading;
+		#region Fields
+		private Vector2 center;
+		#endregion
 
+		#region Properties
 		public override Rectangle BoundingBox{
 			get { return new Rectangle ((int)Position.X - AgentTexture.Width/2, (int)Position.Y - AgentTexture.Height/2, Width, Height); }
 		}
+		#endregion
 
-		private Vector2 Center;
-
-
+		#region Methods
 		public void Initialize(Texture2D texture, Vector2 position, float heading)
 		{
 			AgentTexture = texture;
 			Position = position;
 			Heading = heading;
-			Center.X = AgentTexture.Width / 2;
-			Center.Y = AgentTexture.Height / 2;
+			center.X = AgentTexture.Width / 2;
+			center.Y = AgentTexture.Height / 2;
 		}
 
 		public void Update()
@@ -33,7 +36,7 @@ namespace Homework1
 		{
 			spriteBatch.Draw (AgentTexture, Position, null, Color.White, Heading, Center, 1.0f, SpriteEffects.None, 0f);
 		}
-			
+		#endregion
 	}
 }
 

@@ -2,24 +2,13 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Homework1/Game1.cs">
     <Files>
-      <File FileName="Homework1/Game1.cs" Line="108" Column="39" />
-      <File FileName="Homework1/Player.cs" Line="40" Column="81" />
+      <File FileName="Homework1/Game1.cs" Line="51" Column="17" />
+      <File FileName="Homework1/Player.cs" Line="39" Column="13" />
+      <File FileName="Homework1/Agent.cs" Line="24" Column="18" />
+      <File FileName="Homework1/Sensor.cs" Line="17" Column="13" />
+      <File FileName="Homework1/Rangefinder.cs" Line="45" Column="35" />
+      <File FileName="Homework1/Wall.cs" Line="6" Column="2" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="Homework1" expanded="True">
-            <Node name="Homework1" expanded="True">
-              <Node name="Content" expanded="True">
-                <Node name="Graphics" expanded="True" />
-              </Node>
-              <Node name="Properties" expanded="True" />
-              <Node name="Game1.cs" selected="True" />
-            </Node>
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
