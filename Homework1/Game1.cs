@@ -104,10 +104,15 @@ namespace Homework1
 			// TODO: Add your update logic here		
 			previousKeyboardState = currentKeyboardState;
 			currentKeyboardState = Keyboard.GetState ();
-			UpdatePlayer (gameTime);
 
+			//player.Update (gameTime, currentKeyboardState, walls, GraphicsDevice.Viewport);
+			UpdatePlayer(gameTime);
 			base.Update (gameTime);
 		}
+
+		/*	Player movement method
+		 *  to be replaced by player.Update()
+		 * */
 
 		private void UpdatePlayer(GameTime gameTime)
 		{
