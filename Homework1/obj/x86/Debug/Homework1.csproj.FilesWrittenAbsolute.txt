@@ -12,3 +12,17 @@
 /home/chris/CAP4053/Homework1/Homework1/bin/Debug/Content/Fonts/DebugText.xnb
 /home/chris/CAP4053/Homework1/Homework1/bin/Debug/Content/Graphics/HW1WallHorizontal.xnb
 /home/chris/CAP4053/Homework1/Homework1/bin/Debug/Content/Graphics/HW1WallVertical.xnb
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/obj/x86/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/OpenTK.dll.config
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/Tao.Sdl.dll.config
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/Content/Graphics/HW1Player.xnb
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/Content/Fonts/DebugText.xnb
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/Content/Graphics/HW1WallHorizontal.xnb
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/Content/Graphics/HW1WallVertical.xnb
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/Homework1.exe.mdb
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/Homework1.exe
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/obj/x86/Debug/Homework1.exe
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/obj/x86/Debug/Homework1.exe.mdb
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/MonoGame.Framework.dll
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/OpenTK.dll
+/home/kenneth/Desktop/cap4053/hw1/CAP4053HW1/Homework1/bin/Debug/Tao.Sdl.dll
