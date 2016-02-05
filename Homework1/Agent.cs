@@ -8,6 +8,7 @@ namespace Homework1
 	{
 		#region Properties
 		public float Heading { get; set; }
+		public Vector2 HeadingVector { get { return new Vector2 ((float)Math.Cos (Heading), (float)Math.Sin (Heading)); } }
 		public Texture2D AgentTexture { get; set; }
 		public Vector2 Position { get; set; }
 		public abstract Rectangle BoundingBox {

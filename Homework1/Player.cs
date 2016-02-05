@@ -19,6 +19,8 @@ namespace Homework1
 		public override Rectangle BoundingBox{
 			get { return new Rectangle ((int)Position.X - AgentTexture.Width/2, (int)Position.Y - AgentTexture.Height/2, Width, Height); }
 		}
+
+		public AdjacentAgentSensor AASensor { get; set;}
 		#endregion
 
 		#region Methods
@@ -29,6 +31,7 @@ namespace Homework1
 			Heading = heading;
 			center.X = AgentTexture.Width / 2;
 			center.Y = AgentTexture.Height / 2;
+			AASensor = new AdjacentAgentSensor (this, 100.0f);
 		}
 
 		/*	More appropriate player movement method

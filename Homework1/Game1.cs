@@ -1,6 +1,7 @@
 ﻿#region Using Statements
 using System;
 using System.IO;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
@@ -21,6 +22,7 @@ namespace Homework1
 
 		Player player;
 		Wall[] walls;
+		List<Agent> agents;
 		int numWalls = 2;
 		KeyboardState currentKeyboardState;
 		KeyboardState previousKeyboardState;
@@ -53,6 +55,10 @@ namespace Homework1
 			walls = new Wall[numWalls];
 			for(int i = 0; i < numWalls; i++)
 				walls[i] = new Wall();
+			agents = new List<Agent> ();
+			for (int i = 0; i < 10; i++) {
+				agents.Add (new Player ());
+			}
 			base.Initialize ();
 				
 		}
@@ -80,6 +86,13 @@ namespace Homework1
 					walls [i].Initialize (Content.Load<Texture2D>("Graphics/HW1WallVertical"), wallPosition);
 			}
 			font = Content.Load<SpriteFont> ("Fonts/DebugText");
+			//temp agent adding code, puts 5 - 10 agents on map
+			foreach (Player agent in agents) {
+				Vector2 agentPosition = new Vector2 (r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Width),
+					                       r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Height));
+				agent.Initialize (Content.Load<Texture2D> ("Graphics/HW1Agent2"), agentPosition, 
+					MathHelper.ToRadians ((float)r.Next(360)));
+			}
 
 			//debug texture for drawing collison rectangles
 			debugTex = new Texture2D(GraphicsDevice, 1, 1);
@@ -107,6 +120,7 @@ namespace Homework1
 
 			//player.Update (gameTime, currentKeyboardState, walls, GraphicsDevice.Viewport);
 			UpdatePlayer(gameTime);
+			player.AASensor.Update (agents);
 			base.Update (gameTime);
 		}
 
@@ -176,8 +190,17 @@ namespace Homework1
 					new Vector2 (0, GraphicsDevice.Viewport.Height - (font.LineSpacing*(walls.Length-i))), Color.Black);
 				//spriteBatch.Draw (debugTex, walls [i].BoundingBox, Color.White);
 			}
+			foreach (Player p in agents) {
+				p.Draw (spriteBatch);
+			}
 			spriteBatch.DrawString (font, "Heading (deg): " + (MathHelper.ToDegrees (player.Heading) % 360) 
 				+ "\nPosition (x,y): "+ player.Position.ToString(), new Vector2 (0, 0), Color.Black);
+			int j = 2;
+			foreach (KeyValuePair<Agent, Tuple<float, float>> agent in player.AASensor.AgentsInRange) {
+				spriteBatch.DrawString (font, "Agent: " + agent.Key.ToString() + " Distance: " + agent.Value.Item1
+				+ " Rel. Heading: " + agent.Value.Item2, new Vector2 (0, font.LineSpacing * j), Color.Black);
+				j++;
+			}
 			//more debug
 			//spriteBatch.Draw(debugTex, player.BoundingBox, Color.White);
 			spriteBatch.End ();
