@@ -24,7 +24,6 @@ namespace Homework1
 		int numWalls = 2;
 		KeyboardState currentKeyboardState;
 		KeyboardState previousKeyboardState;
-
 		float playerMoveSpeed;
 		float playerTurnSpeed;
 
@@ -35,7 +34,7 @@ namespace Homework1
 		{
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
-			graphics.IsFullScreen = true;
+			graphics.IsFullScreen = false;
 		}
 	
 		/// <summary>
@@ -155,6 +154,8 @@ namespace Homework1
 			float clampedX = MathHelper.Clamp (player.Position.X, player.Width / 2, GraphicsDevice.Viewport.Width - player.Width / 2);
 			float clampedY = MathHelper.Clamp (player.Position.Y, player.Height / 2, GraphicsDevice.Viewport.Height - player.Height / 2);
 			player.Position = new Vector2 (clampedX, clampedY);
+
+			player.rangefinder.Update (new System.Collections.Generic.List<Agent> (walls));
 		}
 
 		/// <summary>

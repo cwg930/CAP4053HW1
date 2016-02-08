@@ -13,6 +13,7 @@ namespace Homework1
 		private Vector2 center;
 		private float moveSpeed;
 		private float turnSpeed;
+		public Rangefinder rangefinder;
 		#endregion
 
 		#region Properties
@@ -29,6 +30,7 @@ namespace Homework1
 			Heading = heading;
 			center.X = AgentTexture.Width / 2;
 			center.Y = AgentTexture.Height / 2;
+			rangefinder = new Rangefinder (this, 50, 0.0f);
 		}
 
 		/*	More appropriate player movement method
