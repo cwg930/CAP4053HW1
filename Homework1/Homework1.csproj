@@ -55,12 +55,14 @@
     <Compile Include="Agent.cs" />
     <Compile Include="Sensor.cs" />
     <Compile Include="Rangefinder.cs" />
+    <Compile Include="AdjacentAgentSensor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
     <None Include="Content\Content.mgcb" />
     <None Include="packages.config" />
     <None Include="options.txt" />
+    <None Include="Content\Graphics\HW1Agent2.xnb" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="OpenTK.dll.config">
