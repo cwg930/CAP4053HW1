@@ -130,8 +130,8 @@ namespace Homework1
 
 		private void UpdatePlayer(GameTime gameTime)
 		{
-			float velX = (float)(Math.Cos (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
-			float velY = (float)(Math.Sin (player.Heading - MathHelper.PiOver2) * playerMoveSpeed);
+			float velX = (float)(Math.Cos (player.Heading) * playerMoveSpeed);
+			float velY = (float)(Math.Sin (player.Heading) * playerMoveSpeed);
 			if (currentKeyboardState.IsKeyDown (Keys.W)) {
 				player.Position += new Vector2 (velX, velY);
 			}
@@ -206,8 +206,7 @@ namespace Homework1
 			spriteBatch.End ();
 
 			base.Draw (gameTime);
-		}
-			
+		}			
 	}
 }
 

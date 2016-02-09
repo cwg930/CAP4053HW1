@@ -11,8 +11,8 @@ namespace Homework1
 	{
 		#region Fields
 		private Vector2 center;
-		private float moveSpeed;
-		private float turnSpeed;
+//		private float moveSpeed;
+//		private float turnSpeed;
 		#endregion
 
 		#region Properties

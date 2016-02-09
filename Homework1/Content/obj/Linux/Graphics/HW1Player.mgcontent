@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <SourceFile>/home/chris/CAP4053/Homework1/Homework1/Content/Graphics/HW1Player.png</SourceFile>
-  <SourceTime>2016-01-27T11:48:25-05:00</SourceTime>
+  <SourceTime>2016-02-08T18:51:28-05:00</SourceTime>
   <DestFile>/home/chris/CAP4053/Homework1/Homework1/Content/Graphics/HW1Player.xnb</DestFile>
-  <DestTime>2016-01-27T11:49:05-05:00</DestTime>
+  <DestTime>2016-02-08T18:53:24-05:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2016-01-27T00:00:40-05:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

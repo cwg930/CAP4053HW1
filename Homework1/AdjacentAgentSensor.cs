@@ -25,7 +25,8 @@ namespace Homework1
 			foreach (Agent a in agents){
 				if (Vector2.Distance (owner.Position, a.Position) <= range) {
 					//dot product of 2 unit vectors = cosine of angle between them
-					float relativeHeading = (float)Math.Acos(Vector2.Dot(Vector2.Normalize(owner.HeadingVector), Vector2.Normalize(a.HeadingVector)));
+					Vector2 v = a.Position - owner.Position;
+					float relativeHeading = (float)Math.Acos(Vector2.Dot(Vector2.Normalize(owner.HeadingVector), Vector2.Normalize(v)));
 					relativeHeading = MathHelper.ToDegrees (relativeHeading);
 					AgentsInRange.Add (a, new Tuple<float, float>(Vector2.Distance(owner.Position, a.Position), relativeHeading));
 				}
@@ -34,4 +35,3 @@ namespace Homework1
 		#endregion
 	}
 }
-
