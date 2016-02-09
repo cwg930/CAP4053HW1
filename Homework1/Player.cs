@@ -11,7 +11,6 @@ namespace Homework1
 	{
 		#region Fields
 		private Vector2 center;
-		public Rangefinder rangefinder;
 //		private float moveSpeed;
 //		private float turnSpeed;
 		#endregion
@@ -22,6 +21,9 @@ namespace Homework1
 		}
 
 		public AdjacentAgentSensor AASensor { get; set;}
+		public Rangefinder FrontRangefinder{ get; set; }
+		public Rangefinder LeftRangefinder{ get; set; }
+		public Rangefinder RightRangefinder{ get; set; }
 		#endregion
 
 		#region Methods
@@ -33,7 +35,9 @@ namespace Homework1
 			center.X = AgentTexture.Width / 2;
 			center.Y = AgentTexture.Height / 2;
 
-			rangefinder = new Rangefinder (this, 50, 0.0f);
+			FrontRangefinder = new Rangefinder (this, 100, MathHelper.ToRadians(-90));
+			LeftRangefinder = new Rangefinder (this, 100, MathHelper.ToRadians (-135));
+			RightRangefinder = new Rangefinder (this, 100, MathHelper.ToRadians (-45));
 			AASensor = new AdjacentAgentSensor (this, 100.0f);
 		}
 

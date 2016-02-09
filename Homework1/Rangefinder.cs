@@ -15,6 +15,7 @@ namespace Homework1
 		#region Fields
 		private float headingOffset;
 		private Point foundPoint;
+		private Texture2D texture;
 		#endregion
 
 		#region Properties
@@ -28,6 +29,12 @@ namespace Homework1
 			private set {
 			}
 		}
+		public Point FoundPoint {
+			get {
+				return foundPoint;
+			}
+			private set{ }
+		}
 		#endregion
 
 		#region Constructors
@@ -40,8 +47,6 @@ namespace Homework1
 		#region Methods
 		public override void Update(List<Agent> agents)
 		{
-			Debug.WriteLine ("Rangefinder Updating...");
-			Debug.WriteLine ("Rangefinder heading " + Heading);
 			float currentReading = findMinDistance (agents);
 			if (currentReading < range)
 			{
@@ -56,6 +61,12 @@ namespace Homework1
 		private float findMinDistance(List<Agent> agents)
 		{
 			float runningMinimum = range;
+			bool found = false;
+
+			Point rangefinderOrigin = new Point ((int)Origin.X, (int)Origin.Y);
+			Point rangefinderEnd = new Point ((int)(Origin.X + range * Math.Cos (Heading)),
+				(int)(Origin.Y + range * Math.Sin (Heading)));
+			
 			foreach (Agent agent in agents)
 			{
 				// Determine intersection and compute distance
@@ -69,25 +80,25 @@ namespace Homework1
 
 				Point[] points = { corner1, corner2, corner3, corner4 };
 
-				Point rangefinderOrigin = new Point ((int)Origin.X, (int)Origin.Y);
-				Point rangefinderEnd = new Point ((int)(Origin.X + range * Math.Cos (Heading)),
-					                       (int)(Origin.Y + range * Math.Sin (Heading)));
-
 				for (int i = 0; i < points.Length; i++)
 				{
-					foundPoint = lineIntersection (points [i % points.Length], points [(i + 1) % points.Length],
+					Point tempPoint = lineIntersection (points [i % points.Length], points [(i + 1) % points.Length],
 						                          rangefinderOrigin, rangefinderEnd);
 
-					Vector2 intersectionVector = new Vector2 (foundPoint.X, foundPoint.Y);
+					Vector2 intersectionVector = new Vector2 (tempPoint.X, tempPoint.Y);
 					float distance = Vector2.Distance (Origin, intersectionVector);
 					if (distance < runningMinimum)
+					{
+						found = true;
 						runningMinimum = distance;
+						foundPoint = tempPoint;
+					}
 				}
 			}
 
-			// Placeholder for building.
-			Debug.WriteLine(runningMinimum);
-			Debug.WriteLine("Point: X->" + this.foundPoint.X + ", Y->" + this.foundPoint.Y);
+			if (!found)
+				foundPoint = rangefinderEnd;
+
 			return runningMinimum;
 		}
 
@@ -115,7 +126,6 @@ namespace Homework1
 				return new Point (100000, 100000);
 			}
 		}
-			
 		#endregion
 	}
 }
