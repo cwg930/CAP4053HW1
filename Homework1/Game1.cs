@@ -26,7 +26,6 @@ namespace Homework1
 		int numWalls = 2;
 		KeyboardState currentKeyboardState;
 		KeyboardState previousKeyboardState;
-
 		float playerMoveSpeed;
 		float playerTurnSpeed;
 
@@ -121,6 +120,9 @@ namespace Homework1
 			//player.Update (gameTime, currentKeyboardState, walls, GraphicsDevice.Viewport);
 			UpdatePlayer(gameTime);
 			player.AASensor.Update (agents);
+			player.FrontRangefinder.Update (agents);
+			player.LeftRangefinder.Update (agents);
+			player.RightRangefinder.Update (agents);
 			base.Update (gameTime);
 		}
 
@@ -201,6 +203,11 @@ namespace Homework1
 				+ " Rel. Heading: " + agent.Value.Item2, new Vector2 (0, font.LineSpacing * j), Color.Black);
 				j++;
 			}
+			// Use a lowercase "o" as a marker for the end of the rangefinder
+			Vector2 markerSize = font.MeasureString ("o");
+			spriteBatch.DrawString (font, "o", new Vector2 (player.LeftRangefinder.FoundPoint.X - markerSize.X/2, player.LeftRangefinder.FoundPoint.Y - markerSize.Y/2), Color.Red);
+			spriteBatch.DrawString (font, "o", new Vector2 (player.FrontRangefinder.FoundPoint.X - markerSize.X/2, player.FrontRangefinder.FoundPoint.Y - markerSize.Y/2), Color.Red);
+			spriteBatch.DrawString (font, "o", new Vector2 (player.RightRangefinder.FoundPoint.X - markerSize.X/2, player.RightRangefinder.FoundPoint.Y - markerSize.Y/2), Color.Red);
 			//more debug
 			//spriteBatch.Draw(debugTex, player.BoundingBox, Color.White);
 			spriteBatch.End ();

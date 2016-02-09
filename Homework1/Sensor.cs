@@ -17,7 +17,16 @@ namespace Homework1
 		#endregion
 
 		#region Properties
-		public Vector2 Origin { get; set; }
+		public Vector2 Origin 
+		{ 
+			get
+			{ 
+				return owner.Position; 
+			}
+			private set 
+			{
+			}
+		}
 		#endregion
 
 		#region Constructors
