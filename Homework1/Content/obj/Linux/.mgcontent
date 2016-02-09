@@ -4,9 +4,10 @@
   <Platform>Linux</Platform>
   <Config />
   <SourceFiles>
-    <File>/home/chris/CAP4053/Homework1/Homework1/Content/Graphics/HW1Player.png</File>
     <File>/home/chris/CAP4053/Homework1/Homework1/Content/Fonts/DebugText.spritefont</File>
     <File>/home/chris/CAP4053/Homework1/Homework1/Content/Graphics/HW1WallHorizontal.png</File>
     <File>/home/chris/CAP4053/Homework1/Homework1/Content/Graphics/HW1WallVertical.png</File>
+    <File>/home/chris/CAP4053/Homework1/Homework1/Content/Graphics/HW1Agent2.png</File>
+    <File>/home/chris/CAP4053/Homework1/Homework1/Content/Graphics/HW1Player.png</File>
   </SourceFiles>
 </SourceFileCollection>

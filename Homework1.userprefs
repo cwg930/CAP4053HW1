@@ -1,13 +1,14 @@
 ﻿<Properties StartupItem="Homework1/Homework1.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Homework1/Game1.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Homework1/AdjacentAgentSensor.cs">
     <Files>
-      <File FileName="Homework1/Game1.cs" Line="51" Column="17" />
-      <File FileName="Homework1/Player.cs" Line="39" Column="13" />
-      <File FileName="Homework1/Agent.cs" Line="24" Column="18" />
-      <File FileName="Homework1/Sensor.cs" Line="17" Column="13" />
+      <File FileName="Homework1/Game1.cs" Line="23" Column="17" />
+      <File FileName="Homework1/Player.cs" Line="53" Column="20" />
+      <File FileName="Homework1/Agent.cs" Line="20" Column="22" />
+      <File FileName="Homework1/Sensor.cs" Line="27" Column="23" />
       <File FileName="Homework1/Rangefinder.cs" Line="45" Column="35" />
-      <File FileName="Homework1/Wall.cs" Line="6" Column="2" />
+      <File FileName="Homework1/Wall.cs" Line="1" Column="1" />
+      <File FileName="Homework1/AdjacentAgentSensor.cs" Line="35" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
