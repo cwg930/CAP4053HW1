@@ -23,6 +23,7 @@ namespace Homework1
 
 		Player player;
 		Wall[] walls;
+		List<Agent> wallList;
 		List<Agent> agents;
 		int numWalls = 2;
 		KeyboardState currentKeyboardState;
@@ -55,6 +56,7 @@ namespace Homework1
 			walls = new Wall[numWalls];
 			for(int i = 0; i < numWalls; i++)
 				walls[i] = new Wall();
+			wallList = new List<Agent> (walls);
 			agents = new List<Agent> ();
 			for (int i = 0; i < 10; i++) {
 				agents.Add (new Player ());
@@ -122,8 +124,10 @@ namespace Homework1
 			UpdatePlayer(gameTime);
 			player.AASensor.Update (agents);
 
+			// Update rangefinders
 			foreach (Rangefinder r in player.Rangefinders)
-				r.Update (agents);
+				r.Update (wallList);
+			// Update pie slice sensors
 			foreach (PieSliceSensor p in player.PieSliceSensors)
 				p.Update (agents);
 			
