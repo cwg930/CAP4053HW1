@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.Input;
+using System.Text;
 
 #endregion
 
@@ -22,12 +23,12 @@ namespace Homework1
 
 		Player player;
 		Wall[] walls;
+		List<Agent> wallList;
 		List<Agent> agents;
 		LinkedList<String> lines;
 		int numWalls = 2;
 		KeyboardState currentKeyboardState;
 		KeyboardState previousKeyboardState;
-
 		float playerMoveSpeed;
 		float playerTurnSpeed;
 
@@ -56,6 +57,7 @@ namespace Homework1
 			walls = new Wall[numWalls];
 			for(int i = 0; i < numWalls; i++)
 				walls[i] = new Wall();
+			wallList = new List<Agent> (walls);
 			agents = new List<Agent> ();
 			StreamReader sr = new StreamReader ("agents.txt");
 			lines = new LinkedList<String>();
@@ -129,6 +131,14 @@ namespace Homework1
 			//player.Update (gameTime, currentKeyboardState, walls, GraphicsDevice.Viewport);
 			UpdatePlayer(gameTime);
 			player.AASensor.Update (agents);
+
+			// Update rangefinders
+			foreach (Rangefinder r in player.Rangefinders)
+				r.Update (wallList);
+			// Update pie slice sensors
+			foreach (PieSliceSensor p in player.PieSliceSensors)
+				p.Update (agents);
+			
 			base.Update (gameTime);
 		}
 
@@ -209,6 +219,37 @@ namespace Homework1
 				+ " Rel. Heading: " + agent.Value.Item2, new Vector2 (0, font.LineSpacing * j), Color.Black);
 				j++;
 			}
+
+			// Draw strings indicating Pie slice activation levels
+			spriteBatch.DrawString (font, "Activation Levels: ", new Vector2 (0, font.LineSpacing * j), Color.Black);
+			j++;
+
+			int pieSliceNumber = 1;
+			string pieSliceString = "";
+			foreach (PieSliceSensor p in player.PieSliceSensors)
+			{
+				pieSliceString += "" + pieSliceNumber + ": " + p.ActivationLevel + "\n";
+				pieSliceNumber++;
+			}
+			spriteBatch.DrawString (font, pieSliceString , new Vector2 (0, font.LineSpacing * j), Color.Black);
+
+			// Use a lowercase "o" as a marker for the end of the rangefinder
+			Vector2 markerSize = font.MeasureString ("o");
+			foreach (Rangefinder r in player.Rangefinders)
+			{
+				spriteBatch.DrawString (font, "o", new Vector2 (r.FoundPoint.X - markerSize.X / 2, r.FoundPoint.Y - markerSize.Y / 2), Color.Red);
+			}
+
+			// Draw labels on pie slice sensor detections.
+			foreach (PieSliceSensor p in player.PieSliceSensors)
+			{
+				foreach (Agent a in p.DetectedAgents)
+				{
+					markerSize = font.MeasureString (p.Marker);
+					spriteBatch.DrawString (font, p.Marker, a.Position, Color.Green);
+				}
+			}
+				
 			//more debug
 			//spriteBatch.Draw(debugTex, player.BoundingBox, Color.White);
 			spriteBatch.End ();

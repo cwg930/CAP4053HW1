@@ -56,6 +56,7 @@
     <Compile Include="Sensor.cs" />
     <Compile Include="Rangefinder.cs" />
     <Compile Include="AdjacentAgentSensor.cs" />
+    <Compile Include="PieSliceSensor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Icon.png" />
@@ -88,6 +89,7 @@
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!--Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" /-->
   <ItemGroup>
     <Folder Include="Content\Graphics\" />
