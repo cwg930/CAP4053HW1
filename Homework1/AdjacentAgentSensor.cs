@@ -28,7 +28,6 @@ namespace Homework1
 					Vector2 v = a.Position - owner.Position;
 					Vector3 crossResult = Vector3.Cross (new Vector3(owner.HeadingVector.X, owner.HeadingVector.Y, 0), new Vector3(v.X, v.Y, 0));
 					float relativeHeading = (float)Math.Acos(Vector2.Dot(Vector2.Normalize(owner.HeadingVector), Vector2.Normalize(v)));
-					Console.WriteLine ("crossresult: " + crossResult.ToString());
 					relativeHeading = MathHelper.ToDegrees (relativeHeading);
 					if (crossResult.Z < 0) {
 						relativeHeading *= -1;
