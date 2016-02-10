@@ -23,6 +23,7 @@ namespace Homework1
 		Player player;
 		Wall[] walls;
 		List<Agent> agents;
+		LinkedList<String> lines;
 		int numWalls = 2;
 		KeyboardState currentKeyboardState;
 		KeyboardState previousKeyboardState;
@@ -56,9 +57,15 @@ namespace Homework1
 			for(int i = 0; i < numWalls; i++)
 				walls[i] = new Wall();
 			agents = new List<Agent> ();
-			for (int i = 0; i < 10; i++) {
+			StreamReader sr = new StreamReader ("agents.txt");
+			lines = new LinkedList<String>();
+			while (!sr.EndOfStream) {
+				lines.AddLast(sr.ReadLine ());
+			}
+			for (int i = 0; i < lines.Count; i++) {
 				agents.Add (new Player ());
 			}
+		
 			base.Initialize ();
 				
 		}
@@ -86,12 +93,13 @@ namespace Homework1
 					walls [i].Initialize (Content.Load<Texture2D>("Graphics/HW1WallVertical"), wallPosition);
 			}
 			font = Content.Load<SpriteFont> ("Fonts/DebugText");
-			//temp agent adding code, puts 5 - 10 agents on map
+			//extremely hacky agent adding code, will break easily if agents.txt isn't formatted correctly
 			foreach (Player agent in agents) {
-				Vector2 agentPosition = new Vector2 (r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Width),
-					                       r.Next (0, GraphicsDevice.Viewport.TitleSafeArea.Height));
+				String[] tokens = lines.First.Value.Split (',');
+				lines.RemoveFirst ();
+				Vector2 agentPosition = new Vector2 (Convert.ToInt32(tokens[0]), Convert.ToInt32(tokens[1]));
 				agent.Initialize (Content.Load<Texture2D> ("Graphics/HW1Agent2"), agentPosition, 
-					MathHelper.ToRadians ((float)r.Next(360)));
+					MathHelper.ToRadians ((float)Convert.ToInt32(tokens[2])));
 			}
 
 			//debug texture for drawing collison rectangles
@@ -145,7 +153,7 @@ namespace Homework1
 				player.Heading += playerTurnSpeed;
 			}
 
-			// Force headnig to wrap around to prevent ambiguous orientation values.
+			// Force heading to wrap around to prevent ambiguous orientation values.
 			// For example if we don't wrap heading, if we rotate from 30 degrees one direction
 			//   60 degrees and through the 0 angle, we would consider our heading (incorrectly)
 			//   to be 30 degrees again.
@@ -155,7 +163,7 @@ namespace Homework1
 			}
 			// Clamp player heading between 0 and 360 degrees.
 			player.Heading = (player.Heading % MathHelper.ToRadians(360));
-
+			//simple collision detection for walls only
 			foreach (Wall w in walls) {
 				if (player.DetectCollision (w)) {
 					if (currentKeyboardState.IsKeyDown(Keys.W)) {

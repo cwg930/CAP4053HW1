@@ -23,6 +23,10 @@ namespace Homework1
 		#endregion
 
 		#region Methods
+		/*	very simple collision detection method
+			all bounding boxes used are rectangular
+			to allow use of the Intersects() method
+		*/	
 		public bool DetectCollision(Agent target){
 			if (this.BoundingBox.Intersects (target.BoundingBox)) {
 				return true;

@@ -24,12 +24,14 @@ namespace Homework1
 			AgentsInRange.Clear ();
 			foreach (Agent a in agents){
 				if (Vector2.Distance (owner.Position, a.Position) <= range) {
-					//dot product of 2 unit vectors = cosine of angle between them
 					Vector2 v = a.Position - owner.Position;
+					//cross product used to determine if target is cw/ccw from heading
 					Vector3 crossResult = Vector3.Cross (new Vector3(owner.HeadingVector.X, owner.HeadingVector.Y, 0), new Vector3(v.X, v.Y, 0));
+					//dot product of 2 unit vectors = cosine of angle between them
 					float relativeHeading = (float)Math.Acos(Vector2.Dot(Vector2.Normalize(owner.HeadingVector), Vector2.Normalize(v)));
 					Console.WriteLine ("crossresult: " + crossResult.ToString());
 					relativeHeading = MathHelper.ToDegrees (relativeHeading);
+					//make all angles out of 360 for consistency
 					if (crossResult.Z < 0) {
 						relativeHeading *= -1;
 						relativeHeading += 360;

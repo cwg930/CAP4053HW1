@@ -63,6 +63,9 @@
     <None Include="packages.config" />
     <None Include="options.txt" />
     <None Include="Content\Graphics\HW1Agent2.xnb" />
+    <None Include="agents.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="OpenTK.dll.config">
