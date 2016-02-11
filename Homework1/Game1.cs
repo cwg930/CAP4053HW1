@@ -39,7 +39,7 @@ namespace Homework1
 		{
 			graphics = new GraphicsDeviceManager (this);
 			Content.RootDirectory = "Content";
-			graphics.IsFullScreen = false;
+			graphics.IsFullScreen = true;
 		}
 	
 		/// <summary>
@@ -232,6 +232,15 @@ namespace Homework1
 				pieSliceNumber++;
 			}
 			spriteBatch.DrawString (font, pieSliceString , new Vector2 (0, font.LineSpacing * j), Color.Black);
+			j++;
+
+			// Draw for middle, left, right rangefinders.
+			// Really hacky and stupid but it's fine for this.
+			spriteBatch.DrawString (font, "Left Rangefinder: " + player.Rangefinders[1].Reading , new Vector2 (0, font.LineSpacing * (j+player.PieSliceSensors.Count)), Color.Black);
+			j++;
+			spriteBatch.DrawString (font, "Center Rangefinder: " + player.Rangefinders[0].Reading , new Vector2 (0, font.LineSpacing * (j+player.PieSliceSensors.Count)), Color.Black);
+			j++;
+			spriteBatch.DrawString (font, "Right Rangefinder: " + player.Rangefinders[2].Reading , new Vector2 (0, font.LineSpacing * (j+player.PieSliceSensors.Count)), Color.Black);
 
 			// Use a lowercase "o" as a marker for the end of the rangefinder
 			Vector2 markerSize = font.MeasureString ("o");
